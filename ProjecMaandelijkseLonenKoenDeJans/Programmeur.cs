@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjecMaandelijkseLonenKoenDeJans
 {
-    public class Programmeur : Werknemer
+    public class Programmeur
     {
     }
 }

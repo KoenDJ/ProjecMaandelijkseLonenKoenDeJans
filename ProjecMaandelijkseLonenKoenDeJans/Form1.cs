@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,83 +14,51 @@ namespace ProjecMaandelijkseLonenKoenDeJans
 {
     public partial class Form1 : Form
     {
+        public static List<Werknemer> werknemersLijst = new List<Werknemer>();
+
         public Form1()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
-        public List<Werknemer> werknemersLijst = new List<Werknemer>();
         private void Form1_Load(object sender, EventArgs e)
         {
-            Werknemer Koen = new Werknemer("Koen", "man", "18/07/1976", "760718-874.24", "12/03/2010", "Be 125484474866");
+            DateTime geboortedatum = new DateTime(1976, 07, 18);
+            DateTime indienst = new DateTime(2015, 06, 16);
+            Loon nieuwLoon = new Loon(1900, 38, true);
+            Werknemer werknemer = new Werknemer("Koen De Jans", "Man", geboortedatum, "2500", indienst, "BE00 0000 0000", nieuwLoon);
+            if (werknemersLijst.Contains(werknemer))
+            {
+                cbWerknemers.DataSource = werknemersLijst;
+                cbWerknemers.SelectedIndex = 0;
+            }
 
-            cbWerknemers.DataSource = werknemersLijst;
-
+            else
+            {
+                werknemersLijst.Add(werknemer);
+                cbWerknemers.DataSource = werknemersLijst;
+                cbWerknemers.SelectedIndex = 0;
+            }
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cbWerknemers_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Werknemer geselecteerdeWerknemer = (Werknemer)cbWerknemers.SelectedItem;
+            lblGeslacht.Text = geselecteerdeWerknemer.Geslacht;
+            lblGeboorteDatumInvullen.Text = geselecteerdeWerknemer.GeboorteDatum.ToShortDateString();
+            lblRijksregisterInvullen.Text = geselecteerdeWerknemer.RijksregisterNr;
+            lblInvullenDatIndiest.Text = geselecteerdeWerknemer.DatumIndiensttreding.ToShortDateString();
+            lblInvullenIbanNr.Text = geselecteerdeWerknemer.IbanNr;
+            lblStartloon.Text = geselecteerdeWerknemer.Loon.BerekenStartLoon().ToString();
         }
 
-        private void fontDialog1_Apply(object sender, EventArgs e)
+        private void btnBasisloonAanpassen_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void gbWerknemerGegevens_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnWerkNemerAanpassen_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnVerwijderenWerknemer_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLoonbriefAanmaken_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnWerknemerAanmaken_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblGeslacht_Click(object sender, EventArgs e)
-        {
-
+            // Werknemer uit combobox halen en meegeven naar andere form.
+            Werknemer geselecteerdeWerknemer = (Werknemer)cbWerknemers.SelectedItem;
+            AanpassenLoon f = new AanpassenLoon(geselecteerdeWerknemer);
+            f.Show();
+            this.Close();
         }
     }
 }

@@ -10,13 +10,12 @@ namespace ProjecMaandelijkseLonenKoenDeJans
     {
         public string Naam { get; set; }
         public string Geslacht { get   ; set; }
-        public string GeboorteDatum { get; set; }
+        public DateTime GeboorteDatum { get; set; }
         public string RijksregisterNr { get; set; }
-        public string DatumIndiensttreding { get; set; }
+        public DateTime DatumIndiensttreding { get; set; }
         public string IbanNr { get; set; }
-
-        public Loon Loon = new Loon();
-        public Werknemer(string naam, string geslacht, string geboortedatum, string rijksregisterNr, string datumIndiensttreding, string ibanNr, Loon loon)
+        public Loon Loon { get; set; }
+        public Werknemer(string naam, string geslacht, DateTime geboortedatum, string rijksregisterNr, DateTime datumIndiensttreding, string ibanNr, Loon loon)
         {
             this.Naam = naam;
             this.Geslacht = geslacht;
@@ -25,6 +24,11 @@ namespace ProjecMaandelijkseLonenKoenDeJans
             this.DatumIndiensttreding = datumIndiensttreding;
             this.IbanNr = ibanNr;
             this.Loon = loon;
+        }
+
+        public override string ToString()
+        {
+            return Naam;
         }
     }
 }
