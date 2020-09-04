@@ -52,7 +52,6 @@
     <Compile Include="AanpassenLoon.Designer.cs">
       <DependentUpon>AanpassenLoon.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomerSupport.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +60,12 @@
     </Compile>
     <Compile Include="ItSupport.cs" />
     <Compile Include="Loon.cs" />
+    <Compile Include="NieuweWerknemer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NieuweWerknemer.Designer.cs">
+      <DependentUpon>NieuweWerknemer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Programmeur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +76,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NieuweWerknemer.resx">
+      <DependentUpon>NieuweWerknemer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
